@@ -1,0 +1,54 @@
+/* Navigation */
+header[b-g30quwcwz1] {
+    background-color: var(--md-sys-color-surface);
+    box-shadow: var(--md-elevation-level-2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container[b-g30quwcwz1] {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo[b-g30quwcwz1] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+nav ul[b-g30quwcwz1] {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+nav a[b-g30quwcwz1] {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    color: var(--md-sys-color-on-surface-variant);
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+}
+
+nav a:hover[b-g30quwcwz1] {
+    background-color: var(--md-sys-color-surface-variant);
+}
+
+nav a.active[b-g30quwcwz1] {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}

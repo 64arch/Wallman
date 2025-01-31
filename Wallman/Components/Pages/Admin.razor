@@ -1,0 +1,40 @@
+@page "/admin"
+@rendermode InteractiveServer
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+@if (!logined) {
+    <AdminLogin OnLogin="HandleLogin"/>
+}
+else {
+    <section class="admin">
+        <h1>Админ-панель</h1>
+        <p>Просматривайте и одобряйте загруженные пользователями обои.</p>
+        <div class="requests">
+            @if (wallpapers.Count > 0) {
+                <p>Всего запросов: @wallpapers.Count</p>
+                @foreach (var wallpaper in wallpapers) {
+                    <div class="request">
+                        @{
+                            var folder = wallpaper.Name.ToLower().Replace(" ", "_");
+                            var fileExtension = Path.GetExtension(wallpaper.Location);
+                        }
+                        <img src="@($"api/wallpapers/{wallpaper.Platform}/{folder}/prev_wall{fileExtension}")" alt="Wallpaper Preview">
+                        <div class="info">
+                            <h3>@wallpaper.Name</h3>
+                            <p>Платформа: @wallpaper.Platform</p>
+                            <p>Разрешение: @wallpaper.Resolution</p>
+                            <p>Кто загрузил: @wallpaper.Uploader</p>
+                            <button class="button primary" @onclick="() => Approve(wallpaper.Id)">Одобрить</button>
+                            <button class="button secondary" @onclick="() => Reject(wallpaper)">Отклонить</button>
+                        </div>
+                    </div>
+                }   
+            }
+            else {
+                <p>Запросов на данный момент нет.</p>
+            }
+        </div>
+    </section>   
+}

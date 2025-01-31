@@ -1,0 +1,87 @@
+@page "/"
+@using Wallman.DataAccess.Wallpapers
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<script src="downloadController.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<main>
+    <div class="hero">
+        <h1>Добро пожаловать на Wallman</h1>
+        <p class="headline">Найдите идеальные обои для вашего устройства</p>
+        <div class="cta-buttons">
+            <button class="button @GetButtonClass(Platforms.Desktop)" @onclick="() => ChangePlatform(Platforms.Desktop.ToString())">
+                <span class="material-icons">desktop_windows</span>
+                <span>Обои для ПК</span>
+            </button>
+            <button class="button @GetButtonClass(Platforms.Mobile)" @onclick="() => ChangePlatform(Platforms.Mobile.ToString())">
+                <span class="material-icons">smartphone</span>
+                <span>Обои для телефона</span>
+            </button>
+        </div>
+    </div>
+
+    
+    <section class="featured">
+        <input type="text" @bind="searchQuery" id="res" placeholder="Введите название обоев" required>
+        <div class="wallpaper-grid">
+            @foreach (var wallpaper in wallpapers
+                          .Where(x => string.IsNullOrEmpty(searchQuery) || x.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
+                          .Where(x => Enum.TryParse(x.Platform, true, out Platforms result) && result == platform && x.Approved == true))  {
+                <div class="wallpaper-card">
+                    <div class="card-media">
+                        @{
+                            var folder = wallpaper.Name.ToLower().Replace(" ", "_");
+                            var fileExtension = Path.GetExtension(wallpaper.Location);
+                            var apiPrevWallUri = $"api/wallpapers/{wallpaper.Platform}/{folder}/prev_wall{fileExtension}";                 
+                            var apiWallUri = $"api/wallpapers/{wallpaper.Platform}/{folder}/wall{fileExtension}";                 
+                        }
+                        <img src="@apiPrevWallUri">
+                        <div class="card-overlay">
+                            
+                            <button class="button icon-button" @onclick="() => Navigation.NavigateTo(apiWallUri)">
+                                <span class="material-icons">visibility</span>
+                            </button>
+
+                            <button class="button icon-button"
+                                    @onclick="() => DownloadWallpaper(folder, wallpaper.Platform, fileExtension)">
+                                <span class="material-icons">download</span>
+                            </button>
+                            @*<button class="button icon-button">
+                                <span class="material-icons">favorite_border</span>
+                            </button>*@
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>@wallpaper.Name</h3>
+                        <p>@wallpaper.Platform • @wallpaper.Resolution • @wallpaper.Uploader</p>
+                    </div>
+                </div>   
+            }
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Wallman</h4>
+            <p>Лучшие обои для ваших устройств</p>
+        </div>
+        <div class="footer-section">
+            <h4>Социальные сети</h4>
+            <div class="social-links">
+                <a href="#" class="button icon-button">
+                    <span class="material-icons">facebook</span>
+                </a>
+                <a href="#" class="button icon-button">
+                    <span class="material-icons">telegram</span>
+                </a>
+                <a href="#" class="button icon-button">
+                    <span class="material-icons">discord</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

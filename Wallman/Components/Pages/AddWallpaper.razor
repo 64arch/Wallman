@@ -1,0 +1,47 @@
+@page "/upload"
+@using Wallman.DataAccess.Wallpapers
+@using BlazorCaptcha
+@rendermode InteractiveServer
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="_content/BlazorCaptcha/captcha.css" rel="stylesheet" />
+
+<section class="upload">
+    <h1>Добавить обои</h1>
+    <p>Загрузите обои и помогите пополнить нашу коллекцию.</p>
+
+    <form enctype="multipart/form-data">
+        <label for="title">Никнейм</label>
+        <input type="text" id="title" @bind="nickname" placeholder="Введите ваш ник без собачки" required>
+        
+        <label for="title">Название</label>
+        <input type="text" id="title" @bind="name" placeholder="Введите название" required>
+
+        <label for="category">Платформа</label>
+        <select id="category" @bind="selectedPlatform">
+            @foreach (var platform in Enum.GetValues(typeof(Platforms)).Cast<Platforms>()) {
+                <option value="@platform">@platform</option>
+            }
+        </select>
+
+        <label for="title">Разрешение</label>
+        <input type="text" id="res" @bind="resolution" placeholder="Введите разрешение" required>
+
+        <label for="file">Выберите изображение</label>
+        <InputFile OnChange="LoadFiles" accept="image/*" required/>
+
+        <label for="title">Подтвердите что вы не робот</label>
+        <Captcha @bind-CaptchaWord="@Captcha" CharNumber="@CaptchaLetters" />
+        <input type="text" id="cap" @bind="captchaInput" placeholder="Captcha" required>
+        
+        <button class="button primary" @onclick="SendWallpaper" type="button">Отправить на проверку</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(_statusMessage)) {
+        <div class="alert @(_isError ? "alert-danger" : "alert-success") mt-3">
+            @_statusMessage
+        </div>
+    }
+</section>
+

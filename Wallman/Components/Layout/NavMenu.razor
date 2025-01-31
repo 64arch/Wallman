@@ -1,0 +1,36 @@
+﻿<header>
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span class="material-icons">wallpaper</span>
+                <span>Wallman</span>
+            </a>
+            <ul>
+                <li><a href="/" class="@GetActiveClass("/")">
+                    <span class="material-icons">home</span>
+                    <span>Главная</span>
+                </a></li>
+                <li><a href="about" class="@GetActiveClass("about")">
+                    <span class="material-icons">info</span>
+                    <span>О нас</span>
+                </a></li>
+                <li><a href="upload" class="@GetActiveClass("upload")">
+                        <span class="material-icons">upload</span>
+                        <span>Загрузить</span>
+                    </a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+@code {
+    [Inject] private NavigationManager NavManager { get; set; } = default!;
+
+    private string GetActiveClass(string path) {
+        var currentPath = NavManager.Uri.Replace(NavManager.BaseUri, "").Trim('/');
+        if (string.IsNullOrEmpty(currentPath)) {
+            currentPath = "/";
+        }
+        return currentPath.Equals(path, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+    }
+}
