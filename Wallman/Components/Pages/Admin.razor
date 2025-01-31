@@ -9,11 +9,11 @@
 }
 else {
     <section class="admin">
-        <h1>Админ-панель</h1>
-        <p>Просматривайте и одобряйте загруженные пользователями обои.</p>
+        <h1>Admin Panel</h1>
+        <p>Review and approve user-uploaded wallpapers.</p>
         <div class="requests">
             @if (wallpapers.Count > 0) {
-                <p>Всего запросов: @wallpapers.Count</p>
+                <p>Total requests: @wallpapers.Count</p>
                 @foreach (var wallpaper in wallpapers) {
                     <div class="request">
                         @{
@@ -23,17 +23,17 @@ else {
                         <img src="@($"api/wallpapers/{wallpaper.Platform}/{folder}/prev_wall{fileExtension}")" alt="Wallpaper Preview">
                         <div class="info">
                             <h3>@wallpaper.Name</h3>
-                            <p>Платформа: @wallpaper.Platform</p>
-                            <p>Разрешение: @wallpaper.Resolution</p>
-                            <p>Кто загрузил: @wallpaper.Uploader</p>
-                            <button class="button primary" @onclick="() => Approve(wallpaper.Id)">Одобрить</button>
-                            <button class="button secondary" @onclick="() => Reject(wallpaper)">Отклонить</button>
+                            <p>Platform: @wallpaper.Platform</p>
+                            <p>Resolution: @wallpaper.Resolution</p>
+                            <p>Who uploaded: @wallpaper.Uploader</p>
+                            <button class="button primary" @onclick="() => Approve(wallpaper.Id)">Approve</button>
+                            <button class="button secondary" @onclick="() => Reject(wallpaper)">Reject</button>
                         </div>
                     </div>
                 }   
             }
             else {
-                <p>Запросов на данный момент нет.</p>
+                <p>No requests at this time.</p>
             }
         </div>
     </section>   

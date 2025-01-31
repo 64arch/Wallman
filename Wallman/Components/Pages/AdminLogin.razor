@@ -9,22 +9,22 @@
                         <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
                     </svg>
                 </div>
-                <h1 class="auth-title">С возвращением!</h1>
-                <p class="auth-subtitle">Войдите в аккаунт администратора</p>
+                <h1 class="auth-title">Welcome back!</h1>
+                <p class="auth-subtitle">Log in to the administrator account</p>
             </div>
 
             <div>
                 <div class="form-group">
-                    <label class="form-label" for="email">Почта</label>
+                    <label class="form-label" for="email">Email</label>
                     <input @bind="adminModel.AdminEmail" type="email" id="email" class="form-input" placeholder="name@example.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="password">Пароль</label>
-                    <input @bind="adminModel.AdminPass" type="password" id="password" class="form-input" placeholder="Введите пароль" required>
+                    <label class="form-label" for="password">Password</label>
+                    <input @bind="adminModel.AdminPass" type="password" id="password" class="form-input" placeholder="Enter a password" required>
                 </div>
 
-                <button class="button primary" @onclick="HandleLogin">Войти</button>
+                <button class="button primary" @onclick="HandleLogin">Login</button>
             </div>
         </div>
     </div>

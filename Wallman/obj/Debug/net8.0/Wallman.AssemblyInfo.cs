@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Wallman")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e01abcebef29983be6fb45f5ae59258f311e68c8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Wallman")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Wallman")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

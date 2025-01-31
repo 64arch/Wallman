@@ -22,7 +22,7 @@ public partial class AdminLogin : ComponentBase {
     private async Task HandleLogin()
     {
         if (adminModel.AdminEmail != adminSettings.Value.AdminEmail || adminModel.AdminPass != adminSettings.Value.AdminPass) {
-            _statusMessage = "Ошибка: Неправильная почта или пароль.";
+            _statusMessage = "Error: Incorrect email or password.";
             _isError = true;
             return;
         }

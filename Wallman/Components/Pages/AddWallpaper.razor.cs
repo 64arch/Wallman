@@ -33,7 +33,7 @@ public partial class AddWallpaper : ComponentBase {
     private void LoadFiles(InputFileChangeEventArgs e) {
         const long maxFileSize = 20 * 1024 * 1024;
         if (e.File.Size > maxFileSize) {
-            _statusMessage = "Ошибка: Файл слишком большой. Максимальный размер — 20 МБ.";
+            _statusMessage = "Error: File is too large. Maximum size is 20 MB.";
             _isError = true;
             return;
         }
@@ -45,19 +45,19 @@ public partial class AddWallpaper : ComponentBase {
 
     private async Task SendWallpaper() {
         if (captchaInput != Captcha || string.IsNullOrEmpty(captchaInput)) {
-            _statusMessage = "Ошибка: Символы введены не верно.";
+            _statusMessage = "Error: The characters are not correct.";
             _isError = true;
             return;
         }
         
         if (selectedFile == null) {
-            _statusMessage = "Ошибка: Файл не выбран.";
+            _statusMessage = "Error: File not selected.";
             _isError = true;
             return;
         }
 
         if (string.IsNullOrWhiteSpace(name)) {
-            _statusMessage = "Ошибка: Введите название обоев.";
+            _statusMessage = "Error: Enter the title of the wallpaper.";
             _isError = true;
             return;
         }
@@ -78,7 +78,7 @@ public partial class AddWallpaper : ComponentBase {
             uploadsFolder = Path.Combine(AppContext.BaseDirectory, "wallpapers",
                 selectedPlatform.ToString(), sanitizedName);
             if (Directory.Exists(uploadsFolder)) {
-                _statusMessage = $"Обои с таким названием уже существуют!";
+                _statusMessage = $"Error: Wallpapers with this name already exist!";
                 _isError = true;
                 return;
             }
@@ -86,7 +86,7 @@ public partial class AddWallpaper : ComponentBase {
             Directory.CreateDirectory(uploadsFolder);
 
             filePath = Path.Combine(uploadsFolder, "wall" + Path.GetExtension(selectedFile.Name));
-            _statusMessage = "Файл успешно загружен и отправлен на проверку!";
+            _statusMessage = "File successfully downloaded and sent for verification!";
             _isError = false;
             await using FileStream fs = new(filePath, FileMode.Create);
             await selectedFile.OpenReadStream(20 * 1024 * 1024).CopyToAsync(fs);
@@ -97,7 +97,7 @@ public partial class AddWallpaper : ComponentBase {
                 }
             }
             catch (Exception ex) {
-                Console.WriteLine($"Ошибка при обработке изображения: {ex.Message}");
+                Console.WriteLine($"Error while processing image: {ex.Message}");
             }
 
             var wallpaper = new WallpaperModel() {
@@ -121,7 +121,7 @@ public partial class AddWallpaper : ComponentBase {
                 Directory.Delete(uploadsFolder);
             }
 
-            _statusMessage = $"Ошибка при загрузке файла: {ex.Message}";
+            _statusMessage = $"Error while loading file: {ex.Message}";
             _isError = true;
         }
     }

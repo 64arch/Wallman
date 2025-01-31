@@ -8,23 +8,23 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <main>
     <div class="hero">
-        <h1>Добро пожаловать на Wallman</h1>
-        <p class="headline">Найдите идеальные обои для вашего устройства</p>
+        <h1>Welcome to Wallman</h1>
+        <p class="headline">Find the perfect wallpaper for your device</p>
         <div class="cta-buttons">
             <button class="button @GetButtonClass(Platforms.Desktop)" @onclick="() => ChangePlatform(Platforms.Desktop.ToString())">
                 <span class="material-icons">desktop_windows</span>
-                <span>Обои для ПК</span>
+                <span>PC Wallpaper</span>
             </button>
             <button class="button @GetButtonClass(Platforms.Mobile)" @onclick="() => ChangePlatform(Platforms.Mobile.ToString())">
                 <span class="material-icons">smartphone</span>
-                <span>Обои для телефона</span>
+                <span>Mobile Wallpaper</span>
             </button>
         </div>
     </div>
 
     
     <section class="featured">
-        <input type="text" @bind="searchQuery" id="res" placeholder="Введите название обоев" required>
+        <input type="text" @bind="searchQuery" id="res" placeholder="Enter wallpaper name" required>
         <div class="wallpaper-grid">
             @foreach (var wallpaper in wallpapers
                           .Where(x => string.IsNullOrEmpty(searchQuery) || x.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase))
@@ -67,10 +67,10 @@
     <div class="footer-content">
         <div class="footer-section">
             <h4>Wallman</h4>
-            <p>Лучшие обои для ваших устройств</p>
+            <p>Best wallpaper for your devices</p>
         </div>
         <div class="footer-section">
-            <h4>Социальные сети</h4>
+            <h4>Social media</h4>
             <div class="social-links">
                 <a href="#" class="button icon-button">
                     <span class="material-icons">facebook</span>

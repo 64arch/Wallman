@@ -118,7 +118,7 @@ public class WallpapersDBContext {
 
             var rowsAffected = await cmd.ExecuteNonQueryAsync();
             if (rowsAffected == 0) {
-                throw new Exception("Ошибка при добавлении обоев.");
+                throw new Exception("Error when adding wallpaper.");
             }
         }
         catch (Exception e) {

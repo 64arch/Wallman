@@ -8,34 +8,34 @@
 <link href="_content/BlazorCaptcha/captcha.css" rel="stylesheet" />
 
 <section class="upload">
-    <h1>Добавить обои</h1>
-    <p>Загрузите обои и помогите пополнить нашу коллекцию.</p>
+    <h1>Add wallpaper</h1>
+    <p>Download wallpaper and help us to add to our collection.</p>
 
     <form enctype="multipart/form-data">
-        <label for="title">Никнейм</label>
-        <input type="text" id="title" @bind="nickname" placeholder="Введите ваш ник без собачки" required>
+        <label for="title">Nickname</label>
+        <input type="text" id="title" @bind="nickname" placeholder="Enter your username without a dog" required>
         
-        <label for="title">Название</label>
-        <input type="text" id="title" @bind="name" placeholder="Введите название" required>
+        <label for="title">Wallpaper name</label>
+        <input type="text" id="title" @bind="name" placeholder="Enter a name" required>
 
-        <label for="category">Платформа</label>
+        <label for="category">Platform</label>
         <select id="category" @bind="selectedPlatform">
             @foreach (var platform in Enum.GetValues(typeof(Platforms)).Cast<Platforms>()) {
                 <option value="@platform">@platform</option>
             }
         </select>
 
-        <label for="title">Разрешение</label>
-        <input type="text" id="res" @bind="resolution" placeholder="Введите разрешение" required>
+        <label for="title">Resolution</label>
+        <input type="text" id="res" @bind="resolution" placeholder="Enter a resolution" required>
 
-        <label for="file">Выберите изображение</label>
+        <label for="file">Select an image</label>
         <InputFile OnChange="LoadFiles" accept="image/*" required/>
 
-        <label for="title">Подтвердите что вы не робот</label>
+        <label for="title">Confirm that you are not a robot</label>
         <Captcha @bind-CaptchaWord="@Captcha" CharNumber="@CaptchaLetters" />
         <input type="text" id="cap" @bind="captchaInput" placeholder="Captcha" required>
         
-        <button class="button primary" @onclick="SendWallpaper" type="button">Отправить на проверку</button>
+        <button class="button primary" @onclick="SendWallpaper" type="button">Send for verification</button>
     </form>
 
     @if (!string.IsNullOrEmpty(_statusMessage)) {

@@ -86,3 +86,4 @@
 /home/kirill/Рабочий стол/desk/c#/Wallman/Wallman/bin/Debug/net8.0/runtimes/win-x64/native/libSkiaSharp.dll
 /home/kirill/Рабочий стол/desk/c#/Wallman/Wallman/bin/Debug/net8.0/runtimes/win-x86/native/libSkiaSharp.dll
 /home/kirill/Рабочий стол/desk/c#/Wallman/Wallman/obj/Debug/net8.0/scopedcss/Components/Pages/AdminLogin.razor.rz.scp.css
+/home/kirill/Рабочий стол/desk/c#/Wallman/Wallman/obj/Debug/net8.0/Wallman.sourcelink.json
